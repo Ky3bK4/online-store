@@ -1,17 +1,25 @@
-import React from 'react';
+import React, {createContext} from 'react';
 import ReactDOM from 'react-dom';
+import 'typeface-roboto'
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import {BrowserRouter} from "react-router-dom";
+import UserStore from "./store/UserStore";
+import DeviceStore from "./store/DeviceStore";
+import BasketStore from "./store/BasketStore";
+
+export const Context = createContext(null)
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Context.Provider value={{
+    user: new UserStore(),
+    device: new DeviceStore(),
+    basket: new BasketStore(),
+  }}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Context.Provider>,
   document.getElementById('root')
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
